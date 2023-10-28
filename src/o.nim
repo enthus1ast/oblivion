@@ -49,6 +49,12 @@ proc findGroup(arg: string): string =
 
 proc findAlias(group, arg: string): tuple[alias, cmd: string] =
   var matches = initTable[string, string]()
+
+  # Exact match
+  if cfg.contains(group):
+    if cfg[group].contains(arg):
+      return (arg, cfg[group][arg])
+
   for alias, cmd in cfg[group]:
     if alias.startsWith(arg):
       matches[alias] = cmd

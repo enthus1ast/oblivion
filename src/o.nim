@@ -1,13 +1,8 @@
 import os, terminal, tables, strformat, strutils, parsecfg, parseopt
 import oblivion/[utils, process]
 
-# Get XDG directory
-if not existsEnv("XDG_CONFIG_DIRS"):
-  error("Env var 'XDG_CONFIG_DIRS' is not set")
-  quit QuitFailure
-
 let
-  xdg = getEnv("XDG_CONFIG_DIRS")
+  xdg = getConfigDir()
   cfgdir = xdg / "oblivion"
   cfgfile = cfgdir / "config.ini"
 
